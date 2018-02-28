@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cards xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="D:\Program Files\Topdesk 5\web\open\xmlform\xsd\xmlcard.xsd">
+ 
+<card name="spincident"  table="incident" state="2"  condition="fillStateOf_spincident='filled' ">
+     
+ 
+    <files>
+    <uploadedFile field="spincident_bijlages_bijlages_bijlage1"/>
+    <uploadedFile field="spincident_bijlages_bijlages_bijlage2"/>
+    <uploadedFile field="spincident_bijlages_bijlages_bijlage3"/>
+    <uploadedFile field="spincident_bijlages_bijlages_bijlage4"/>
+    <uploadedFile field="spincident_bijlages_bijlages_bijlage5"/>
+    </files>
+     
+    <fields>
+        <field name="persoonid">
+                <lookup table="persoon" lookupfield="email">
+                <formvalue name="spincident_contactgg_contactgg_emailadres"/>
+                </lookup>
+        </field>
+ 
+        <field name="vrijetekst5"><formvalue name="spincident_beschrijving_beschrijving_urgentie"/></field>
+        <field name="attvrijetekst4">Standaard Platform Incident</field>
+        <field name="vrijetekst4"><formvalue name="spincident_beschrijving_beschrijving_impact"/></field>
+ 
+        <field name="korteomschrijving" >
+            <formvalue name="spincident_beschrijving_beschrijving_korteomschrijving"/>
+        </field>
+         
+        <field name="soortmeldingid">
+            <lookup table="soortmelding" lookupfield="naam">Incident</lookup>
+        </field>
+         
+        <field name="incident_domeinid">
+            <lookup table="classificatie" filterexpression="ISNULL(parentid) OR EMPTY(parentid)" resultfield="unid" lookupfield="naam">IV-Integratieplatform</lookup>
+        </field>
+         
+        <field name="incident_specid">
+            <lookup table="classificatie" lookupfield="parentid" resultfield="unid" filterexpression="naam = spincident_productdienst_productdienst_productdienst">
+                <lookup table="classificatie" filterexpression="incidentbeheer AND (ISNULL(parentid) OR EMPTY(parentid))" resultfield="unid" lookupfield="naam">IV-Integratieplatform</lookup>
+            </lookup>
+        </field>
+         
+        <field name="soortbinnenkomstid">
+            <lookup table="soortbinnenkomst" lookupfield="naam">SelfServiceDesk</lookup>
+        </field>
+         
+        <field name="datumaangemeld">
+            <expression value="DATE()" />
+        </field>
+         
+        <field name="afhandelingstatusid" >
+            <lookup table="afhandelingstatus">Wacht op leverancier</lookup>
+        </field>
+         
+        <field name="configuratieobjectid" >
+            <lookup table="object" lookupfield="ref_naam">CI (nog) niet in CMDB</lookup>     
+        </field>  
+         
+             
+                 
+        <field name="impactid" condition="spincident_beschrijving_beschrijving_impact_spoed">
+            <lookup table="impact" lookupfield="naam">1. Prio 1 (Hoog)</lookup>
+        </field>
+        <field name="impactid" condition="spincident_beschrijving_beschrijving_impact_hoog">
+            <lookup table="impact" lookupfield="naam">2. Prio 2 (Middel)</lookup>
+        </field>
+        <field name="impactid" condition="spincident_beschrijving_beschrijving_impact_midden">
+            <lookup table="impact" lookupfield="naam">3. Prio 3 (Laag)</lookup>
+        </field>
+        <field name="impactid" condition="spincident_beschrijving_beschrijving_impact_laag">
+            <lookup table="impact" lookupfield="naam">4. Prio 4 (geen oplostijd)</lookup>
+        </field>
+         
+        <field name="urgencyid">
+            <lookup table="urgency" lookupfield="naam">1</lookup>
+        </field>  
+         
+        <field name="doorlooptijdid" >
+            <lookup table="doorlooptijd" lookupfield="naam">Best Effort</lookup>
+        </field>
+         
+        <field name="operatorgroupid">
+            <lookup table="actiedoor" lookupfield="naam">IVP-SP</lookup>
+        </field>
+        <field name="operatorid">
+            <lookup table="actiedoor" lookupfield="naam">IVP-SP</lookup>
+        </field>
+ 
+        <field name="supplierid">
+            <lookup table="leverancier"  lookupfield="naam">IenM-IBI-DCI</lookup>
+        </field>
+         
+        <field name="verzoek" >
+            Incident Standaard Platform/Centraal Aansluitpunt geconstateerd op<space/><formvalue name="spincident_beschrijving_beschrijving_wanneer"/>.<linebreak/><linebreak/>
+            Product/dienst:<space/><formvalue name="spincident_productdienst_productdienst_productdienst"/><linebreak/>
+            Instantie:<space/><formvalue name="spincident_productdienst_productdienst_instantie"/><linebreak/>
+            PR nummer:<space/><formvalue name="spincident_productdienst_productdienst_PRnummer"/><linebreak/><linebreak/>
+            Heeft het incident zich vaker voorgedaan?<space/><formvalue name="spincident_beschrijving_beschrijving_vaker"/><linebreak/><linebreak/>
+            Incidentnummer:<space/><formvalue name="spincident_beschrijving_beschrijving_incidentnummer"/><linebreak/><linebreak/>
+            Wat is er geconstateerd?<space/><formvalue name="spincident_beschrijving_beschrijving_geconstateerd"/><linebreak/><linebreak/>
+            Wat zijn de teruggegeven (fout)meldingen?<space/><formvalue name="spincident_beschrijving_beschrijving_foutmeldingen"/><linebreak/><linebreak/>
+            Datum:<space/><formvalue name="spincident_beschrijving_beschrijving_wanneer"/><linebreak/><linebreak/>
+            Impact:<space/><formvalue name="spincident_beschrijving_beschrijving_impact"/><linebreak/><linebreak/>
+            Urgentie:<space/><formvalue name="spincident_beschrijving_beschrijving_urgentie"/><linebreak/><linebreak/>
+        </field> 
+             
+ 
+ 
+         
+        <field name="actie" >
+            Melding is verzonden naar de beheerorganisatie SP bij IenM/IBI/DCI.<linebreak/>
+            Na registratie van de melding zal de melding vanuit de beheerorganisatie van SP worden beantwoord en contact worden gezocht met de aanvrager:<space/><formvalue name="spincident_contactgg_contactgg_aanvrager"/>
+             
+        </field>
+    </fields>
+ 
+</card>
+ 
+ 
+ 
+</cards>
