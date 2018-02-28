@@ -1,0 +1,38 @@
+SELECT
+  change.briefdescription
+  ,wijziging_impact.naam AS [wijziging_impact naam]
+  ,change.number
+  ,c1.naam as categorie
+  ,c2.naam as subcategorie
+  ,change.vrijedatum1
+  ,(CASE 
+		WHEN change.vrijedatum1 IS NULL THEN 99999
+		ELSE change.vrijedatum1
+	END) AS datum1	
+  ,change.vrijedatum2
+  ,change.currentphase
+  ,wbaanvraagtype.naam AS [wbaanvraagtype naam]
+  ,GETDATE() AS currentdate
+  ,afdeling.naam AS afdeling
+  ,actiedoor.naam AS Coördinator
+  ,object.ref_naam AS ObjectID	
+FROM
+  change
+  INNER JOIN wijziging_impact
+    ON change.impactid = wijziging_impact.unid
+  INNER JOIN wbaanvraagtype
+    ON change.typeid = wbaanvraagtype.unid
+  INNER JOIN afdeling
+    ON change.aanmelderafdelingid = afdeling.unid  
+  INNER JOIN classificatie c1
+    ON change.categoryid = c1.unid 
+  INNER JOIN classificatie c2
+    ON change.subcategoryid = c2.unid 
+  INNER JOIN actiedoor as actiedoor
+	ON	change.managerid = actiedoor.unid  
+  INNER JOIN object 
+    ON  change.objectid = object.unid 	 
+WHERE
+  change.vrijelogisch2 = N'True'
+  AND change.closed = N'False'
+  AND (change.currentphase = 4 OR change.currentphase = 5)
