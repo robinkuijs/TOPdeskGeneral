@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" initialpage="eloket" xsi:noNamespaceSchemaLocation="D:\Program Files\Topdesk\web\open\xmlform\xsd\xmlform.xsd" showValidationMessages="true">
+  
+  
+  
+  
+     
+    <!--
+   Standaard platform incident
+-->
+     
+    <form name="spincident" preloadlogic="contactpersoon" next="submit" validateOn="onChange">
+             
+         
+        <autoFill triggerField="uid">
+            <fill fieldName="aanvrager" withValueExpression="ref_dynanaam"/>
+            <fill fieldName="telefoon" withValueExpression="mobiel"/>
+            <fill fieldName="emailadres" withValueExpression="email"/>
+            <fill fieldName="refafdeling" withValueExpression="ref_afdeling"/>
+            <fill fieldName="functie" withValueExpression="functie"/> 
+            <fill fieldName="extrabpersoon" withValueExpression="extrabpersoonid"/>
+     
+        </autoFill>
+ 
+ 
+        <autoFill triggerField="urgentie" condition="(spincident_beschrijving_beschrijving_impact_laag AND spincident_beschrijving_beschrijving_urgentie_4) OR (spincident_beschrijving_beschrijving_impact_laag AND spincident_beschrijving_beschrijving_urgentie_3) OR (spincident_beschrijving_beschrijving_impact_midden AND spincident_beschrijving_beschrijving_urgentie_4)">
+            <fill fieldName="invul" withValueExpression="'Laag - 1 maand'" />
+        </autoFill>
+        <autoFill triggerField="urgentie" condition="(spincident_beschrijving_beschrijving_impact_midden AND spincident_beschrijving_beschrijving_urgentie_1) OR (spincident_beschrijving_beschrijving_impact_hoog AND spincident_beschrijving_beschrijving_urgentie_2) OR (spincident_beschrijving_beschrijving_impact_spoed AND spincident_beschrijving_beschrijving_urgentie_3)">
+            <fill fieldName="invul" withValueExpression="'Hoog - 8 uur'" />
+        </autoFill>   
+        <autoFill triggerField="urgentie" condition="(spincident_beschrijving_beschrijving_impact_laag AND spincident_beschrijving_beschrijving_urgentie_1) OR (spincident_beschrijving_beschrijving_impact_laag AND spincident_beschrijving_beschrijving_urgentie_2) OR (spincident_beschrijving_beschrijving_impact_midden AND spincident_beschrijving_beschrijving_urgentie_2) OR (spincident_beschrijving_beschrijving_impact_midden AND spincident_beschrijving_beschrijving_urgentie_3) OR (spincident_beschrijving_beschrijving_impact_hoog AND spincident_beschrijving_beschrijving_urgentie_3) OR (spincident_beschrijving_beschrijving_impact_hoog AND spincident_beschrijving_beschrijving_urgentie_4)OR (spincident_beschrijving_beschrijving_impact_spoed AND spincident_beschrijving_beschrijving_urgentie_4)">
+            <fill fieldName="invul" withValueExpression="'Middel - 5 dagen'" />
+        </autoFill>           
+        <autoFill triggerField="urgentie" condition="(spincident_beschrijving_beschrijving_impact_spoed AND spincident_beschrijving_beschrijving_urgentie_1) OR (spincident_beschrijving_beschrijving_impact_spoed AND spincident_beschrijving_beschrijving_urgentie_2) OR (spincident_beschrijving_beschrijving_impact_hoog AND spincident_beschrijving_beschrijving_urgentie_1)">
+            <fill fieldName="invul" withValueExpression="'Major - 4 uur'" />
+        </autoFill>
+         
+         
+        <autoFill triggerField="impact" condition="(spincident_beschrijving_beschrijving_impact_laag AND spincident_beschrijving_beschrijving_urgentie_4) OR (spincident_beschrijving_beschrijving_impact_laag AND spincident_beschrijving_beschrijving_urgentie_3) OR (spincident_beschrijving_beschrijving_impact_midden AND spincident_beschrijving_beschrijving_urgentie_4)">
+            <fill fieldName="invul" withValueExpression="'Laag - 1 maand'" />
+        </autoFill>
+        <autoFill triggerField="impact" condition="(spincident_beschrijving_beschrijving_impact_midden AND spincident_beschrijving_beschrijving_urgentie_1) OR (spincident_beschrijving_beschrijving_impact_hoog AND spincident_beschrijving_beschrijving_urgentie_2) OR (spincident_beschrijving_beschrijving_impact_spoed AND spincident_beschrijving_beschrijving_urgentie_3)">
+            <fill fieldName="invul" withValueExpression="'Hoog - 8 uur'" />
+        </autoFill>   
+        <autoFill triggerField="impact" condition="(spincident_beschrijving_beschrijving_impact_laag AND spincident_beschrijving_beschrijving_urgentie_1) OR (spincident_beschrijving_beschrijving_impact_laag AND spincident_beschrijving_beschrijving_urgentie_2) OR (spincident_beschrijving_beschrijving_impact_midden AND spincident_beschrijving_beschrijving_urgentie_2) OR (spincident_beschrijving_beschrijving_impact_midden AND spincident_beschrijving_beschrijving_urgentie_3) OR (spincident_beschrijving_beschrijving_impact_hoog AND spincident_beschrijving_beschrijving_urgentie_3) OR (spincident_beschrijving_beschrijving_impact_hoog AND spincident_beschrijving_beschrijving_urgentie_4)OR (spincident_beschrijving_beschrijving_impact_spoed AND spincident_beschrijving_beschrijving_urgentie_4)">
+            <fill fieldName="invul" withValueExpression="'Middel - 5 dagen'" />
+        </autoFill>           
+        <autoFill triggerField="impact" condition="(spincident_beschrijving_beschrijving_impact_spoed AND spincident_beschrijving_beschrijving_urgentie_1) OR (spincident_beschrijving_beschrijving_impact_spoed AND spincident_beschrijving_beschrijving_urgentie_2) OR (spincident_beschrijving_beschrijving_impact_hoog AND spincident_beschrijving_beschrijving_urgentie_1)">
+            <fill fieldName="invul" withValueExpression="'Major - 4 uur'" />
+        </autoFill>
+     
+        <row name="info" inoverview="never" drawheader="false" columns="4">
+           <group name="info" span="4">
+                 <emptyField/>
+                 <infoField name="informatie" label="none" note="html" placeLabel="onTop" inoverview="never"/>
+                 <emptyField/>
+           </group>
+        </row>
+             
+        <row name="contactgg" hidden="false" columns="4">
+            <group name="contactgg" span="4" hidden="false">
+                <textField name="uid" hidden="true" inoverview="never"/>
+                <textField name="aanvrager" disabled="true"/>
+                <textField name="functie" disabled="true" />
+                <suggestField table="extrabpersoon" displayexpression='naam' name="extrabpersoon" disabled="true"/>
+                <textField name="refafdeling" disabled="true"/>                               
+                <textField name="telefoon" disabled="true" />
+                <textField name="emailadres" disabled="true"><isEmail/></textField>
+                <textField name="jaar" disabled="true" hidden="true"/>
+                <textField name="maand" disabled="true" hidden="true"/>               
+                <textField name="dag" disabled="true" hidden="true"/>             
+            </group>
+        </row> 
+ 
+        <row name="productdienst" hidden="false" columns="4">
+            <group name="productdienst" span="4" hidden="false">
+                <radioField name="productdienst" mandatory="true" validate="onChange">
+                    <data>
+                        <option name="ca" valueExpression="'Centraal Aansluitpunt'"/>
+                        <option name="sp" valueExpression="'Standaard Platform'"/>
+                    </data>
+                </radioField><emptyField/>          
+             
+                <textField name="instantie" mandatory="true" validate="onChange"/>    
+                <radioField name="PRnummer" mandatory="true" dependencies="spincident_productdienst_productdienst_productdienst_sp" validate="onChange">
+                <data>
+                        <option name="optie1" />
+                        <option name="optie2" />
+                        <option name="optie3" />
+                        <option name="optie4" />
+                        <option name="optie5" />
+                    </data>
+                </radioField>
+                <emptyField/>                 
+            </group>
+             
+        </row> 
+         
+        <row name="beschrijving" columns="4" >
+            <group name="beschrijving" span="4">
+                 <dateField name="datum" mandatory="true" initialValue="DATE()" disabled="true" hidden="true" inoverview="never"/>
+                <dateField name="wanneer" mandatory="true"  validate="onChange"><isDateOffsetMaximal fromDateField="datum" days="1" months="0" years="0"/>
+             
+        </dateField>
+                <radioField name="vaker" mandatory="true" validate="onChange">
+                    <data>
+                        <option name="ja" />
+                        <option name="nee" />
+                    </data>
+                </radioField>
+                <textField name="incidentnummer" mandatory="false" dependencies="spincident_beschrijving_beschrijving_vaker_ja" validate="onChange"/> 
+                <emptyField/>
+                 
+                <radioField name="urgentie" emptyoption="true" mandatory="true" note="html" disabled="false">
+                <data>
+                        <option name="4" valueExpression="'4 Geen beperkingingen'"/>
+                        <option name="3" valueExpression="'3 Workaround beschikbaar'"/>
+                        <option name="2" valueExpression="'2 Hinder, geen workaround'"/>
+                        <option name="1" valueExpression="'1 Kan niet werken'"/>
+                </data>
+                 
+                </radioField>
+                <emptyField/>
+                <radioField name="impact" emptyoption="true" mandatory="true"  disabled="false">
+                <data>
+                        <option name="laag" label="html" valueExpression="'4 Laag'"/>
+                        <option name="midden" valueExpression="'3 Midden'"/>
+                        <option name="hoog" valueExpression="'2 Hoog'"/>
+                        <option name="spoed" valueExpression="'1 Spoed'"/>
+                </data>
+                 
+                </radioField>
+                <emptyField/>
+                <infoField name="uitleg" label="html" placeLabel="onTop" note="html"/>
+                <textField name="invul" label="html" placeLabel="onRightSide" disabled="true"/>
+                <emptyField/>
+                <infoField name="prioriteit" label="html" placeLabel="onTop" note="html"/>
+                <emptyField/>
+                 
+                <textField name="korteomschrijving" note="html" mandatory="true" validate="onChange"><isTextLength smallerThanOrEqual="80"/></textField>
+                <memoField name="geconstateerd" rows="4" mandatory="true" validateOn="onChange"/>
+                <memoField name="foutmeldingen" rows="4" mandatory="true" validateOn="onChange"/>
+                <emptyField/>
+            </group>
+        </row>
+                 
+         
+         
+        <row name="bijlages"  columns="4" drawheader="false">
+            <group name="bijlages" span="4">
+                <uploadField name="bijlage1" label="html" mandatory="false" note="html" validate="onChange"><isFileSize smallerThanUnit="MB" smallerThan="1"/></uploadField>
+                <uploadField name="bijlage2" label="html" mandatory="false" note="html" validate="onChange" dependencies="fillStateOf_spincident_bijlages_bijlages_bijlage1='filled'"><isFileSize smallerThanUnit="MB" smallerThan="1"/></uploadField>
+                <uploadField name="bijlage3" label="html" mandatory="false" note="html" validate="onChange" dependencies="fillStateOf_spincident_bijlages_bijlages_bijlage2='filled'"><isFileSize smallerThanUnit="MB" smallerThan="1"/></uploadField>
+                <uploadField name="bijlage4" label="html" mandatory="false" note="html" validate="onChange" dependencies="fillStateOf_spincident_bijlages_bijlages_bijlage3='filled'"><isFileSize smallerThanUnit="MB" smallerThan="1"/></uploadField>
+                <uploadField name="bijlage5" label="html" mandatory="false" note="html" validate="onChange" dependencies="fillStateOf_spincident_bijlages_bijlages_bijlage4='filled'"><isFileSize smallerThanUnit="MB" smallerThan="1"/></uploadField>
+                <emptyField/>
+                <infoField name="informatie" label="none" note="html" placeLabel="onTop" inoverview="never"/>
+            </group>
+        </row>
+         
+    </form>
+ 
+  
+  
+  
+  
+ 
+</forms>
